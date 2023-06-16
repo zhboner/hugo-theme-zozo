@@ -355,7 +355,8 @@ hr {
   font-size: 11px;
 }
 
-.footer .powered_by a {
+.footer .powered_by a,
+.footer .powered_by p {
   color: #cccccc;
   margin: 0 2px;
 }
