@@ -1,0 +1,52 @@
+{{ partial "head.html" . }}
+
+<body>
+    <div class="main animate__animated animate__fadeInDown">
+        {{ partial "nav.html" . }}
+        {{ partial "header.html" . }}
+        <div class="content">
+            <div class="repost_entry">
+                {{ range .Data.Pages.GroupByDate "2006" }}
+                <div class="listing_title">{{ .Key }}</div>
+                <div class="listing">
+                    {{ range .Pages }}
+                    <div class="post_title">
+                        <h2><a href='{{ .RelPermalink }}'>{{ .Title }}</a></h2>
+                    </div>
+                    {{ if .Site.Params.enableSummary }}
+                    <div class="post_content markdown">
+                        <p>{{ .Summary }}...</p>
+                        <p><a href='{{ .RelPermalink }}'>继续阅读 ☞</a></p>
+                    </div>
+                    {{ end }}
+                    <div class="post_footer">
+                        <div class="meta">
+                            <div class="info">
+                                <span class="field">
+                                    <i class="ri-map-pin-time-line"></i>
+                                    <span class="date">{{ .Date.Format "2006.01.02" }}</span>
+                                </span>
+                                {{ with .Params.tags }}
+                                <span class="field tags">
+                                    <i class="ri-stack-line"></i>
+                                    {{ range . }}
+                                    <a href="{{ "tags" | absURL }}/{{ . | urlize }}/">{{ . }}</a>
+                                    {{ end }}
+                                </span>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </div>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+            <div class="pagination"></div>
+        </div>
+        <a id="back_to_top" href="#" class="back_to_top"><i class="ri-arrow-up-s-line"></i></a>
+    </div>
+    {{ partial "footer.html" . }}
+    {{ partial "js.html" . }}
+</body>
+
+</html>
